@@ -29,14 +29,14 @@ const accountData = run(`aws sts get-caller-identity --output json`);
 const awsAccountId = JSON.parse(accountData).Account;
 
 if (direction === 'push') {
-    images.forEach((images) => {
+    images.forEach((image) => {
         console.log(`Pushing local image ${image} to ${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com/${image}`);
         run(`docker tag ${image} ${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com/${image}`);
         run(`docker tag ${image} ${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com/${image}${tag}`);
         run(`docker push ${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com/${image}`);
     })
 } else if (direction == 'pull') {
-    images.forEach((images) => {
+    images.forEach((image) => {
         console.log("Pulling ${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com/${image} to ${image}");
         run(`docker pull ${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com/${image}`);
         run(`docker tag ${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com/${image} ${image} `);
