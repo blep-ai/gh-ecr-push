@@ -6,11 +6,10 @@ inputs:
     description: Access key for IAM User.
   secret-access-key:
     description: Secret access key for IAM User.
-  image:
-    description: The name of the image on ECR.
-  local-image:
-    description: The local name of the image.  If not specified, defaults to same as 'image'.
-    required: false
+  images:
+    description: The name of the images generated. Must be same as on ECR.
+  tag:
+    description: The tag to use for all images.
   region:
     description: AWS Region to use.  Defaults to us-east-1.
     required: false
